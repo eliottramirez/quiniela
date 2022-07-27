@@ -1,0 +1,24 @@
+<section class="section">
+  <div class="container is-max-desktop">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><%= link_to "Calendario", matches_path %></li>
+        <li class="is-active"><a href="#" aria-current="page"><%= "Partido #{@match.id}" %></a></li>
+      </ul>
+    </nav>
+
+    <h1 class="title"><%= "Editar Partido #{@match.id}" %></h1>
+
+  </div>
+
+  <div class="container is-max-desktop mt-4">
+    <div class="box">
+      <%= render "form", match: @match, locals: {action: "Actualizar"} %>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop mt-6">
+    <%= link_to "Show this match", @match %> |
+    <%= link_to "Back to matches", matches_path %>
+  </div>
+</section>

@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slug: MyString
+  name: MyString
+  flag: MyString
+  group: MyString
+  group_number: MyString
+  position: 1
+  played: 1
+  won: 1
+  drawn: 1
+  lost: 1
+  goals_for: 1
+  goals_against: 1
+  goals_difference: 1
+  points: 1
+
+two:
+  slug: MyString
+  name: MyString
+  flag: MyString
+  group: MyString
+  group_number: MyString
+  position: 1
+  played: 1
+  won: 1
+  drawn: 1
+  lost: 1
+  goals_for: 1
+  goals_against: 1
+  goals_difference: 1
+  points: 1

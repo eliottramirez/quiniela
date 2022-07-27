@@ -1,0 +1,43 @@
+<div id="<%= dom_id match %>" >
+  <%#= match.date.localtime.strftime("%e %b") %>
+
+  <div class="has-text-centered">
+    <p class="is-size-7">
+      <%= link_to "Partido #{match.id}", match, class:"has-text-black" %>
+    </p>
+    <p class="is-size-7"><%= match.result %></p>
+    <p class="is-size-7"><%= match.status %></p>
+  </div>
+
+  <div class="columns is-vcentered is-mobile is-centered">
+    <div class="column has-text-right is-hidden-mobile">
+      <p class="is-size-5"><%= "#{match.home_team.name}" %></p>
+    </div>
+
+    <div class="column has-text-centered is-narrow-tablet">
+      <h2 class="is-size-1"><%= "#{match.home_team.flag}" %></h2>
+      <p class="is-size-6 is-hidden-tablet"><%= "#{match.home_team.name}" %></p>
+    </div>
+
+    <div class="column has-text-centered is-narrow">
+      <p class="title"><%= match.home_score %></p>
+    </div>
+
+    <div class="column has-text-centered is-narrow">
+      <%= match.date.localtime.strftime("%H:%M") %>
+    </div>
+
+    <div class="column has-text-centered is-narrow">
+      <p class="title"><%= match.away_score %></p>
+    </div>
+
+    <div class="column has-text-centered is-narrow-tablet">
+      <h2 class="is-size-1"><%= "#{match.away_team.flag}" %></h2>
+      <p class="is-size-6 is-hidden-tablet"><%= "#{match.away_team.name}" %></p>
+    </div>
+
+    <div class="column has-text-left is-hidden-mobile">
+      <p class="is-size-5"><%= "#{match.away_team.name}" %></p>
+    </div>
+  </div>
+</div>

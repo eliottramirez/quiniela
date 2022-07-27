@@ -1,0 +1,29 @@
+<section class="section">
+  <div id="pools" class="container is-max-desktop">
+    <% if notice.present? %>
+      <div class="notification is-primary is-light">
+        <%# <button class="delete"></button> %>
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <div class="columns is-vcentered is-mobile is-gapless">
+      <div class="column is-narrow mr-3">
+        <h1 class="title">Quinielas</h1>
+      </div>
+      <div class="column is-narrow">
+        <%= link_to new_pool_path, class: "button is-inverted is-link" do %>
+          <%= render 'heroicons/plus-circle_solid' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="content">
+      <% @pools.each do |pool| %>
+        <li class="is-size-5">
+          <%= link_to "Quiniela #{pool.id}", pool %>
+        </li>
+      <% end %>
+    </div>
+  </div>
+</section>

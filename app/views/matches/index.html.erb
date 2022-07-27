@@ -1,0 +1,18 @@
+<section class="section">
+  <div id="matches" class="container is-max-desktop">
+    <% if notice.present? %>
+      <div class="notification is-primary is-light">
+        <%# <button class="delete"></button> %>
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <h1 class="title">Calendario</h1>
+    <div class="box">
+      <% @matches.each do |match| %>
+        <%= render match %>
+        <hr>
+      <% end %>
+    </div>
+  </div>
+</section>

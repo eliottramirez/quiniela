@@ -1,0 +1,52 @@
+<div id="<%= dom_id pool %>" class="box">
+  <% pool.bets.each do |bet| %>
+
+    <div id="<%= dom_id bet %>">
+      <%#= bet.match.date.localtime.strftime("%e %b") %>
+      <div class="is-size-7 has-text-centered"><%= bet.match.date.localtime.strftime("%H:%M") %></div>
+
+      <div class="columns is-vcentered is-mobile is-centered">
+        <div class="column has-text-right is-hidden-mobile">
+          <p class="is-size-6"><%= "#{bet.match.home_team.name}" %></p>
+        </div>
+
+        <div class="column has-text-centered is-narrow-tablet">
+          <p class="is-size-2"><%= "#{bet.match.home_team.flag}" %></p>
+          <p class="is-size-6 is-hidden-tablet"><%= "#{bet.match.home_team.name}" %></p>
+        </div>
+
+        <div class="column has-text-centered is-narrow">
+          <div class="control">
+            <label class="radio is-size-7">
+              <input type="radio" <%= 'checked' if bet.guess?('home') %> disabled>
+              <br>
+              LOCAL
+            </label>
+
+            <label class="radio is-size-7">
+              <input type="radio" <%= 'checked' if bet.guess?('draw') %> disabled>
+              <br>
+              EMPATE
+            </label>
+
+            <label class="radio is-size-7">
+              <input type="radio" <%= 'checked' if bet.guess?('away') %> disabled>
+              <br>
+              VISITA
+            </label>
+          </div>
+        </div>
+
+        <div class="column has-text-centered is-narrow-tablet">
+          <p class="is-size-2"><%= "#{bet.match.away_team.flag}" %></p>
+          <p class="is-size-6 is-hidden-tablet"><%= "#{bet.match.away_team.name}" %></p>
+        </div>
+
+        <div class="column has-text-left is-hidden-mobile">
+          <p class="is-size-6"><%= "#{bet.match.away_team.name}" %></p>
+        </div>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+</div>

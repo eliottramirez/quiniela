@@ -1,0 +1,19 @@
+<section class="section">
+  <div class="container is-max-desktop">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><%= link_to "Quinielas", pools_path %></li>
+        <li class="is-active"><a href="#" aria-current="page">Nueva Quiniela</a></li>
+      </ul>
+    </nav>
+
+    <h1 class="title">Nueva Quiniela</h1>
+
+    <%= render "form", pool: @pool %>
+
+  </div>
+
+  <div class="container is-max-desktop mt-6">
+    <%= link_to "Back to pools", pools_path %>
+  </div>
+</section>

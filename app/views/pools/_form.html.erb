@@ -1,0 +1,83 @@
+<%= form_with(model: pool) do |form| %>
+  <% if pool.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pool.errors.count, "error") %> prohibited this pool from being saved:</h2>
+
+      <ul>
+        <% pool.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="columns is-vcentered is-gapless is-mobile">
+    <div class="column is-narrow mr-3">
+      <h1 class="title"><%= "Editar Quiniela #{@pool.id}" %></h1>
+    </div>
+
+    <div class="column is-narrow">
+      <div class="field">
+        <div class="control">
+          <%= form.submit "Guardar", class: "button is-link is-inverted" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <%= form.fields_for :bets do |bet_form| %>
+      <div>
+        <%#= bet_form.object.match.date.localtime.strftime("%e %b") %>
+
+        <div class="is-size-7 has-text-centered"><%= bet_form.object.match.date.localtime.strftime("%H:%M") %></div>
+
+        <div class="columns is-vcentered is-mobile is-centered">
+          <div class="column has-text-right is-hidden-mobile">
+            <p class="is-size-6"><%= "#{bet_form.object.match.home_team.name}" %></p>
+          </div>
+
+          <div class="column has-text-centered is-narrow-tablet">
+            <p class="is-size-2"><%= "#{bet_form.object.match.home_team.flag}" %></p>
+            <p class="is-size-6 is-hidden-tablet"><%= "#{bet_form.object.match.home_team.name}" %></p>
+          </div>
+
+          <div class="column has-text-centered is-narrow">
+            <div class="control">
+
+              <%= bet_form.hidden_field :id %>
+              <%= bet_form.hidden_field :match_id %>
+              <label class="radio is-size-7">
+                <%= bet_form.radio_button :guess, "home", disabled: bet_form.object.disabled? %>
+                <br>
+                LOCAL
+              </label>
+
+              <label class="radio is-size-7">
+                <%= bet_form.radio_button :guess, "draw", disabled: bet_form.object.disabled? %>
+                <br>
+                EMPATE
+              </label>
+
+              <label class="radio is-size-7">
+                <%= bet_form.radio_button :guess, "away", disabled: bet_form.object.disabled? %>
+                <br>
+                VISITA
+              </label>
+            </div>
+          </div>
+
+          <div class="column has-text-centered is-narrow-tablet">
+            <p class="is-size-2"><%= "#{bet_form.object.match.away_team.flag}" %></p>
+            <p class="is-size-6 is-hidden-tablet"><%= "#{bet_form.object.match.away_team.name}" %></p>
+          </div>
+
+          <div class="column has-text-left is-hidden-mobile">
+            <p class="is-size-6"><%= "#{bet_form.object.match.away_team.name}" %></p>
+          </div>
+        </div>
+      </div>
+      <hr>
+    <% end %>
+  </div>
+<% end %>
