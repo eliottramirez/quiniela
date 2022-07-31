@@ -1,7 +1,0 @@
-<section class="section">
-  <div id="standings" class="container is-max-desktop">
-    <% @standings.each do |group| %>
-      <%= render partial: "standings/group", locals: {name: group[:group_name], teams: group[:teams]} %>
-    <% end %>
-  </div>
-</section>

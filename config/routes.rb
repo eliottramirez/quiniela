@@ -4,7 +4,5 @@ Rails.application.routes.draw do
   resources :matches, constraints: { format: :html }
   resources :pools, constraints: { format: :html }
 
-  get "/standings", to: "standings#index"
-
   root "parties#index"
 end
