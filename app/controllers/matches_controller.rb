@@ -3,7 +3,7 @@ class MatchesController < ApplicationController
 
   # GET /matches or /matches.json
   def index
-    @matches = Match.all
+    @matches = authorize Match.all
   end
 
   # GET /matches/1 or /matches/1.json
@@ -12,7 +12,7 @@ class MatchesController < ApplicationController
 
   # GET /matches/new
   def new
-    @match = Match.new
+    @match = authorize Match.new
   end
 
   # GET /matches/1/edit
@@ -21,7 +21,7 @@ class MatchesController < ApplicationController
 
   # POST /matches or /matches.json
   def create
-    @match = Match.new(match_params)
+    @match = authorize Match.new(match_params)
 
     if @match.save
       redirect_to match_url(@match), notice: "Match was successfully created."
@@ -50,7 +50,7 @@ class MatchesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_match
-    @match = Match.find(params[:id])
+    @match = authorize Match.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

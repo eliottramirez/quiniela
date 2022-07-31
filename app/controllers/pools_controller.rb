@@ -3,13 +3,13 @@ class PoolsController < ApplicationController
 
   # GET /pools or /pools.json
   def index
-    @pools = Pool.all
+    @pools = authorize policy_scope(Pool)
   end
 
   # GET /pools/1 or /pools/1.json
   def show
     @bets =
-      if @pool.belongs_to?(current_user)
+      if current_user.owner_of?(@pool)
         @pool.bets
       else
         @pool.public_bets
@@ -18,7 +18,7 @@ class PoolsController < ApplicationController
 
   # GET /pools/new
   def new
-    @pool = Pool.new
+    @pool = authorize Pool.new
     @pool.party = Party.find_by(sharing_code: params[:sharing_code])
     @pool.user = current_user
     Match.all.each { |match| @pool.bets << Bet.new(pool: @pool, match: match) }
@@ -30,7 +30,7 @@ class PoolsController < ApplicationController
 
   # POST /pools or /pools.json
   def create
-    @pool = Pool.new(pool_params)
+    @pool = authorize Pool.new(pool_params)
 
     if @pool.save
       redirect_to party_url(@pool.party), notice: "Te has unido al grupo \"#{@pool.party.name}\"."
@@ -52,14 +52,14 @@ class PoolsController < ApplicationController
   def destroy
     @pool.destroy
 
-    redirect_to parties_url, notice: "Abandonaste el grupo."
+    redirect_to parties_url, notice: "#{@pool.user.name} abandóno el grupo."
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_pool
-    @pool = Pool.find(params[:id])
+    @pool = authorize Pool.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

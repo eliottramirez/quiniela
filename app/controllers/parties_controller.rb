@@ -3,18 +3,16 @@ class PartiesController < ApplicationController
 
   # GET /parties or /parties.json
   def index
-    @parties = current_user.parties
+    @parties = authorize policy_scope(Party)
   end
 
   # GET /parties/1 or /parties/1.json
   def show
-    @member = current_user.member?(@party)
-    @admin = current_user.admin?(@party)
   end
 
   # GET /parties/new
   def new
-    @party = Party.new
+    @party = authorize Party.new
     pool = Pool.new(party: @party, user: current_user)
     Match.all.each { |match| pool.bets << Bet.new(pool: pool, match: match) }
     @party.pools << pool
@@ -26,7 +24,7 @@ class PartiesController < ApplicationController
 
   # POST /parties or /parties.json
   def create
-    @party = Party.new(party_params)
+    @party = authorize Party.new(party_params)
 
     if @party.save
       redirect_to party_url(@party), notice: "Grupo creado exitosamente."
@@ -38,7 +36,7 @@ class PartiesController < ApplicationController
   # PATCH/PUT /parties/1 or /parties/1.json
   def update
     if @party.update(party_params)
-      redirect_to party_url(@party), notice: "Grupo actualizado exitosamente."
+      redirect_to party_url(@party), notice: "Grupo actualizado."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -48,14 +46,14 @@ class PartiesController < ApplicationController
   def destroy
     @party.destroy
 
-    redirect_to parties_url, notice: "Grupo eliminado exitosamente."
+    redirect_to parties_url, notice: "Grupo eliminado."
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_party
-    @party = Party.find(params[:id])
+    @party = authorize Party.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

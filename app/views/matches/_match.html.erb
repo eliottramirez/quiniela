@@ -1,12 +1,8 @@
 <div id="<%= dom_id match %>" >
-  <%#= match.date.localtime.strftime("%e %b") %>
-
   <div class="has-text-centered">
     <p class="is-size-7">
       <%= link_to "Partido #{match.id}", match, class:"has-text-black" %>
     </p>
-    <p class="is-size-7"><%= match.result %></p>
-    <p class="is-size-7"><%= match.status %></p>
   </div>
 
   <div class="columns is-vcentered is-mobile is-centered">
@@ -24,7 +20,7 @@
     </div>
 
     <div class="column has-text-centered is-narrow">
-      <%= match.date.localtime.strftime("%H:%M") %>
+      <%= tag.span format_match_status(match), class: style_match_status(match) %>
     </div>
 
     <div class="column has-text-centered is-narrow">

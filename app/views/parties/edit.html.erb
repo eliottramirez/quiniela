@@ -2,8 +2,16 @@
   <div class="container is-max-desktop">
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
-        <li><%= link_to "Mis Grupos", parties_path %></li>
-        <li class="is-active"><%= link_to @party.name, @party, 'aria-current' => "page" %></li>
+        <li>
+          <span class="icon-text">
+            <%= link_to parties_path do %>
+              <%= render "heroicons/home", style: :outline, size: :small %>
+              <span>Mis Grupos</span>
+            <% end %>
+          </span>
+        </li>
+        <li><%= link_to @party.name, party_path(@party) %></li>
+        <li class="is-active"><%= link_to "Editar", party_path(@party), "aria-current" => "page" %></li>
       </ul>
     </nav>
 
@@ -11,9 +19,5 @@
 
     <%= render "form", party: @party, verb: "Editar" %>
 
-  </div>
-
-  <div class="container is-max-desktop mt-6">
-    <%= link_to "Regresar a mis grupos", parties_path, class: "button is-link is-inverted" %>
   </div>
 </section>

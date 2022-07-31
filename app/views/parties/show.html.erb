@@ -24,21 +24,25 @@
         <div class="level-item">
           <h1 class="title"><%= @party.name %></h1>
         </div>
-        <% if @admin %>
+
+        <% if policy(@party).update? %>
           <div class="level-item">
             <%= link_to edit_party_path(@party) , class: "button is-link is-inverted" do %>
               <%= render 'heroicons/pencil_outline' %>
             <% end %>
           </div>
+        <% end %>
+
+        <% if policy(@party).destroy? %>
           <div class="level-item">
             <%= button_to @party, method: :delete, class: "button is-inverted is-danger" do %>
-              <%= render 'heroicons/trash_outline' %>
+              <%= render 'heroicons/trash', style: :outline, size: :default %>
             <% end %>
           </div>
         <% end %>
       </div>
       <div class="level-right">
-        <% if @member && !@admin %>
+        <% if !current_user.admin_of?(@party) && policy(current_user.pool(@party)).destroy?  %>
           <div class="level-item">
             <%= button_to pool_path(current_user.pool(@party)), method: :delete, class: "button is-danger" do %>
               <span>Abandonar grupo</span>
@@ -49,8 +53,8 @@
       </div>
     </div>
     <div class="columns is-centered py-6">
-      <div id="<%= dom_id @party %>" class="column is-half-tablet box">
-        <table class="table is-striped is-fullwidth">
+      <div id="<%= dom_id @party %>" class="column is-half-desktop box">
+        <table class="table is-hoverable is-fullwidth">
           <thead>
             <th>Pos.</th>
             <td>Usuario</td>
@@ -63,6 +67,13 @@
                 <th><%= index %></th>
                 <td><%= link_to user.name, pool_path(user.pool(@party))  %></td>
                 <td><%= user.pool(@party).points %></td>
+                <% if current_user.admin_of?(@party) %>
+                  <td>
+                    <%= button_to pool_path(user.pool(@party)), method: :delete, class: "button is-danger is-inverted is-small" do %>
+                      <%= render "heroicons/trash", style: :outline, size: :small %>
+                    <% end %>
+                  </td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
@@ -70,18 +81,16 @@
       </div>
     </div>
 
-    <% if @admin || !@admin %>
-      <section class="hero is-link">
-        <div class="hero-body has-text-centered">
-          <p class="title">
-            Invita a tus amigos al grupo
-          </p>
-          <p class="subtitle">
-            Código: <span class="is-size-3 is-family-monospace has-text-weight-medium"><%= @party.sharing_code %></span>
-          </p>
-        </div>
-      </section>
-    <% end %>
+    <section class="hero is-link">
+      <div class="hero-body has-text-centered">
+        <p class="title">
+          Invita a tus amigos al grupo
+        </p>
+        <p class="subtitle">
+          Código: <span class="is-size-3 is-family-monospace has-text-weight-medium"><%= @party.sharing_code %></span>
+        </p>
+      </div>
+    </section>
 
   </div>
 </section>

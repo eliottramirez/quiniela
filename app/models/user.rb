@@ -21,7 +21,11 @@ class User < ApplicationRecord
   has_many :pools, dependent: :destroy
   has_many :parties, through: :pools
 
-  def admin?(party)
+  def owner_of?(pool)
+    pool.user_id == self.id
+  end
+
+  def admin_of?(party)
     self.pool(party)&.party_admin
   end
 
@@ -29,7 +33,7 @@ class User < ApplicationRecord
     self.pools.find_by(party: party)
   end
 
-  def member?(party)
+  def member_of?(party)
     !self.pools.find_by(party: party).nil?
   end
 end

@@ -26,18 +26,14 @@
         <div class="level-item">
           <h1 class="title"><%= "Quiniela de #{@pool.user.name}" %></h1>
         </div>
-        <% if @pool.belongs_to?(current_user) %>
+        <% if policy(@pool).update? %>
           <div class="level-item">
             <%= link_to edit_pool_path(@pool) , class: "button is-link is-inverted" do %>
               <%= render 'heroicons/pencil_outline' %>
             <% end %>
           </div>
-          <div class="level-item">
-            <%= button_to @pool, method: :delete, class: "button is-inverted is-danger" do %>
-              <%= render 'heroicons/trash_outline' %>
-            <% end %>
-          </div>
         <% end %>
+
       </div>
       <div class="level-right mr-3">
         <div class="level-item">

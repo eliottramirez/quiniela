@@ -3,22 +3,17 @@
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
         <li><%= link_to "Calendario", matches_path %></li>
-        <li class="is-active"><a href="#" aria-current="page"><%= "Partido #{@match.id}" %></a></li>
+        <li><%= link_to "Partido #{@match.id}", @match %></li>
+        <li class="is-active"><%= link_to "Editar", edit_match_path(@match), "aria-current" => "page" %></li>
       </ul>
     </nav>
 
     <h1 class="title"><%= "Editar Partido #{@match.id}" %></h1>
-
   </div>
 
   <div class="container is-max-desktop mt-4">
     <div class="box">
-      <%= render "form", match: @match, locals: {action: "Actualizar"} %>
+      <%= render "form_edit", match: @match %>
     </div>
-  </div>
-
-  <div class="container is-max-desktop mt-6">
-    <%= link_to "Show this match", @match %> |
-    <%= link_to "Back to matches", matches_path %>
   </div>
 </section>

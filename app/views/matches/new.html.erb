@@ -1,11 +1,14 @@
 <section class="section">
   <div class="container is-max-desktop">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><%= link_to "Calendario", matches_path %></li>
+        <li class="is-active"><%= link_to "Crear partido", new_match_path, "aria-current" => "page" %></li>
+      </ul>
+    </nav>
+
     <h1 class="title">Crear partido</h1>
 
-    <%= render "form", match: @match, locals: {action: "Crear"} %>
-  </div>
-
-  <div class="container is-max-desktop mt-6">
-    <%= link_to "Back to matches", matches_path %>
+    <%= render "form", match: @match %>
   </div>
 </section>

@@ -16,10 +16,6 @@ class Pool < ApplicationRecord
   has_many :bets, dependent: :destroy
   accepts_nested_attributes_for :bets, allow_destroy: true
 
-  def belongs_to?(user)
-    self.user_id == user.id
-  end
-
   def points
     self.bets.hits
   end
