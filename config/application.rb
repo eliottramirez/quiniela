@@ -20,5 +20,6 @@ module Quiniela
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.generators.jbuilder = false
+    config.i18n.default_locale = :es
   end
 end

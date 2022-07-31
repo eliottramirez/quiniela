@@ -1,0 +1,45 @@
+<%= form_with(model: party) do |form| %>
+  <% if party.errors.any? %>
+    <div class="notification is-danger is-light">
+      <%# <button class="delete"></button> %>
+      <div class="content">
+        <h6>No fue posible guardar debido a los siguientes errores: </h6>
+        <ul>
+          <% party.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="columns is-centered">
+    <div class="column is-two-thirds box is-centered">
+      <div class="field">
+        <%= form.label "Nombre del grupo", class: "label" %>
+        <div class="control">
+          <%= form.text_field :name, class: "input" %>
+        </div>
+      </div>
+
+      <%= form.fields_for :pools do |pool_form| %>
+        <%= pool_form.hidden_field :id %>
+        <%= pool_form.hidden_field :party_id %>
+        <%= pool_form.hidden_field :user_id %>
+        <%= pool_form.hidden_field :party_admin, value: true %>
+
+        <%= pool_form.fields_for :bets do |bet_form| %>
+          <%= bet_form.hidden_field :id %>
+          <%= bet_form.hidden_field :match_id %>
+          <%= bet_form.hidden_field :guess, value: nil %>
+        <% end %>
+      <% end %>
+
+      <div class="field">
+        <div class="control">
+          <%= form.submit "#{verb} grupo", class: "button is-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

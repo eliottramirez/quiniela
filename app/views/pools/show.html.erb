@@ -1,42 +1,52 @@
-<section class="section">
-  <div class="container is-max-desktop">
-    <% if notice.present? %>
-      <div class="notification is-primary is-light">
-        <%# <button class="delete"></button> %>
-        <%= notice %>
-      </div>
-    <% end %>
-
+<section class="has-background-light">
+  <div class="container is-max-desktop py-2">
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
-        <li><%= link_to "Quinielas", pools_path %></li>
-        <li class="is-active"><a href="#" aria-current="page"><%= "Quiniela #{@pool.id}" %></a></li>
+        <li>
+          <span class="icon-text">
+            <%= link_to root_path do %>
+              <%= render "heroicons/home", style: :outline, size: :small %>
+              <span>Mis Grupos</span>
+            <% end %>
+          </span>
+        </li>
+        <li><%= link_to @pool.party.name, party_path(@pool.party) %></li>
+        <li class="is-active"><%= link_to @pool.user.name, pool_path(@pool), "aria-current" => "page" %></li>
       </ul>
     </nav>
+  </div>
+</section>
 
-    <div class="columns is-vcentered is-gapless is-mobile">
-      <div class="column is-narrow mr-3">
-        <h1 class="title"><%= "Quiniela #{@pool.id}" %></h1>
-      </div>
+<section class="section">
+  <div class="container is-max-desktop">
+    <%# notice %>
 
-      <div class="column is-narrow">
-        <%= link_to edit_pool_path(@pool) , class: "button is-link is-inverted" do %>
-          <%= render 'heroicons/pencil_outline' %>
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <h1 class="title"><%= "Quiniela de #{@pool.user.name}" %></h1>
+        </div>
+        <% if @pool.belongs_to?(current_user) %>
+          <div class="level-item">
+            <%= link_to edit_pool_path(@pool) , class: "button is-link is-inverted" do %>
+              <%= render 'heroicons/pencil_outline' %>
+            <% end %>
+          </div>
+          <div class="level-item">
+            <%= button_to @pool, method: :delete, class: "button is-inverted is-danger" do %>
+              <%= render 'heroicons/trash_outline' %>
+            <% end %>
+          </div>
         <% end %>
       </div>
-
-      <div class="column is-narrow">
-        <%= button_to @pool, method: :delete, class: "button is-inverted is-danger" do %>
-          <%= render 'heroicons/trash_outline' %>
-        <% end %>
+      <div class="level-right mr-3">
+        <div class="level-item">
+          <p class="is-size-4 has-text-weight-medium"><%= "Puntos: #{@pool.points}"%></p>
+        </div>
       </div>
     </div>
 
-    <%= render @pool %>
+    <%= render @pool, bets: @bets %>
 
-  </div>
-
-  <div class="container is-max-desktop mt-6">
-    <%= link_to "Back to pools", pools_path %>
   </div>
 </section>

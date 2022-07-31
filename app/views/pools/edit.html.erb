@@ -3,16 +3,15 @@
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
         <li><%= link_to "Quinielas", pools_path %></li>
-        <li class="is-active"><a href="#" aria-current="page"><%= "Quiniela #{@pool.id}" %></a></li>
+        <li class="is-active"><%= link_to "Quiniela #{@pool.id}", @pool, 'aria-current' => "page" %></li>
       </ul>
     </nav>
 
-    <%= render "form", pool: @pool %>
+    <%= render "form", pool: @pool, locals: {verb: "Editar" } %>
 
   </div>
 
   <div class="container is-max-desktop mt-6">
-    <%= link_to "Show this pool", @pool %> |
-    <%= link_to "Back to pools", pools_path %>
+    <%= link_to "Regresar", pools_path, class: "button is-link is-inverted" %>
   </div>
 </section>

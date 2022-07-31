@@ -12,7 +12,23 @@
 
   <body>
     <%= render "shared/navbar" %>
+
+    <% if notice.present? %>
+      <div class="notification is-primary is-light">
+        <%# <button class="delete"></button> %>
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert.present? %>
+      <div class="notification is-danger is-light">
+        <%# <button class="delete"></button> %>
+        <%= alert %>
+      </div>
+    <% end %>
+
     <%= yield %>
+
     <%= render "shared/footer" %>
   </body>
 </html>

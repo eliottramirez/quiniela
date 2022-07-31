@@ -1,19 +1,46 @@
 <section class="section">
   <div class="container is-max-desktop">
-    <nav class="breadcrumb" aria-label="breadcrumbs">
-      <ul>
-        <li><%= link_to "Quinielas", pools_path %></li>
-        <li class="is-active"><a href="#" aria-current="page">Nueva Quiniela</a></li>
-      </ul>
-    </nav>
+    <p class="title">¿Deseas unirte al grupo?</p>
 
-    <h1 class="title">Nueva Quiniela</h1>
+    <div class="columns is-centered">
+      <div class="column card is-half-desktop mt-4 pb-0">
+        <%= form_with(model: @pool) do |form| %>
+          <%= form.hidden_field :id %>
+          <%= form.hidden_field :party_id %>
+          <%= form.hidden_field :user_id %>
+          <%= form.hidden_field :party_admin, value: false %>
 
-    <%= render "form", pool: @pool %>
+          <%= form.fields_for :bets do |bet_form| %>
+            <%= bet_form.hidden_field :id %>
+            <%= bet_form.hidden_field :guess %>
+            <%= bet_form.hidden_field :match_id %>
+          <% end %>
 
-  </div>
+          <div class="card-content">
+            <p class="title has-text-centered">
+              <%= @pool.party.name %>
+            </p>
+            <p class="subtitle has-text-centered">
+              de
+              <span class="has-text-weight-medium"><%= @pool.party.admin.name %></span>
+            </p>
+          </div>
 
-  <div class="container is-max-desktop mt-6">
-    <%= link_to "Back to pools", pools_path %>
+          <footer class="card-footer">
+            <p class="card-footer-item">
+              <span>
+                <%= form.submit "Unirme", class: "button is-link" %>
+              </span>
+            </p>
+
+            <p class="card-footer-item">
+              <span>
+                <%= link_to "Cancelar", root_path, class: "button is-inverted is-link" %>
+              </span>
+            </p>
+          </footer>
+        <% end %>
+      </div>
+    </div>
   </div>
 </section>

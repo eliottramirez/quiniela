@@ -1,11 +1,10 @@
 <div id="<%= dom_id pool %>" class="box">
-  <% pool.bets.each do |bet| %>
-
+  <% bets.each do |bet| %>
     <div id="<%= dom_id bet %>">
       <%#= bet.match.date.localtime.strftime("%e %b") %>
-      <div class="is-size-7 has-text-centered"><%= bet.match.date.localtime.strftime("%H:%M") %></div>
+      <div class="is-size-7 has-text-centered"><%= bet.match.date.localtime.strftime("%e %b, %H:%M") %></div>
 
-      <div class="columns is-vcentered is-mobile is-centered">
+      <div class="columns is-vcentered is-mobile is-centered ">
         <div class="column has-text-right is-hidden-mobile">
           <p class="is-size-6"><%= "#{bet.match.home_team.name}" %></p>
         </div>
@@ -18,21 +17,21 @@
         <div class="column has-text-centered is-narrow">
           <div class="control">
             <label class="radio is-size-7">
-              <input type="radio" <%= 'checked' if bet.guess?('home') %> disabled>
+              <%= radio_button_tag "", "", bet.guess?("home"), disabled: true %>
               <br>
-              LOCAL
+              <%= tag.span "LOCAL", class: bet_span_classes(bet, "home") %>
             </label>
 
             <label class="radio is-size-7">
-              <input type="radio" <%= 'checked' if bet.guess?('draw') %> disabled>
+              <%= radio_button_tag "", "", bet.guess?("draw"), disabled: true %>
               <br>
-              EMPATE
+              <%= tag.span "EMPATE", class: bet_span_classes(bet, "draw") %>
             </label>
 
             <label class="radio is-size-7">
-              <input type="radio" <%= 'checked' if bet.guess?('away') %> disabled>
+              <%= radio_button_tag "", "", bet.guess?("away"), disabled: true %>
               <br>
-              VISITA
+              <%= tag.span "VISITA", class: bet_span_classes(bet, "away") %>
             </label>
           </div>
         </div>

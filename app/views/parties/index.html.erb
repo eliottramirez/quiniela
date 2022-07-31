@@ -1,0 +1,59 @@
+<section class="has-background-light">
+  <div class="container is-max-desktop py-2">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li class="is-active">
+          <span class="icon-text">
+            <%= link_to root_path, "aria-current" => "page" do %>
+              <%= render "heroicons/home", style: :outline, size: :small %>
+              <span>Mis Grupos</span>
+            <% end %>
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div id="parties" class="container is-max-desktop">
+    <%# notice %>
+
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <h1 class="title">Mis Grupos</h1>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          <%= link_to "Crear un grupo", new_party_path, class: "button is-link" %>
+        </div>
+        <div class="level-item">
+          <%= form_with url: new_pool_path, method: :get do |form| %>
+            <div class="field has-addons">
+              <div class="control">
+                <%= form.text_field :sharing_code, class: "input", placeholder: "Código" %>
+              </div>
+              <div class="control">
+                <%= form.submit "Unirme a un grupo", class: "button is-primary" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <% if @parties.empty? %>
+        <p>No tienes ningún grupo.</p>
+      <% end %>
+
+      <% @parties.each do |party| %>
+        <li class="is-size-5">
+          <%= link_to party.name, party %>
+        </li>
+      <% end %>
+    </div>
+  </div>
+</section>

@@ -8,11 +8,19 @@ class PoolsController < ApplicationController
 
   # GET /pools/1 or /pools/1.json
   def show
+    @bets =
+      if @pool.belongs_to?(current_user)
+        @pool.bets
+      else
+        @pool.public_bets
+      end
   end
 
   # GET /pools/new
   def new
     @pool = Pool.new
+    @pool.party = Party.find_by(sharing_code: params[:sharing_code])
+    @pool.user = current_user
     Match.all.each { |match| @pool.bets << Bet.new(pool: @pool, match: match) }
   end
 
@@ -25,7 +33,7 @@ class PoolsController < ApplicationController
     @pool = Pool.new(pool_params)
 
     if @pool.save
-      redirect_to pool_url(@pool), notice: "Quiniela creada exitosamente."
+      redirect_to party_url(@pool.party), notice: "Te has unido al grupo \"#{@pool.party.name}\"."
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +42,7 @@ class PoolsController < ApplicationController
   # PATCH/PUT /pools/1 or /pools/1.json
   def update
     if @pool.update(pool_params)
-      redirect_to pool_url(@pool), notice: "Quiniela actualizada exitosamente."
+      redirect_to pool_url(@pool), notice: "Quiniela actualizada."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -44,7 +52,7 @@ class PoolsController < ApplicationController
   def destroy
     @pool.destroy
 
-    redirect_to pools_url, notice: "Quniela eliminada exitosamente."
+    redirect_to parties_url, notice: "Abandonaste el grupo."
   end
 
   private
@@ -56,6 +64,6 @@ class PoolsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def pool_params
-    params.require(:pool).permit(bets_attributes: [:id, :guess, :match_id])
+    params.require(:pool).permit(:id, :party_id, :user_id, :party_admin, bets_attributes: [:id, :guess, :match_id])
   end
 end

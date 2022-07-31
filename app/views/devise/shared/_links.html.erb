@@ -1,0 +1,39 @@
+<div class="columns">
+  <%- if controller_name != 'sessions' %>
+    <div class="column is-narrow">
+      <%= link_to "Iniciar sesión", new_session_path(resource_name), class: "button is-link is-inverted " %>
+    </div>
+  <% end %>
+
+  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+    <div class="column is-narrow">
+      <%= link_to "Crear cuenta", new_registration_path(resource_name), class: "button is-link is-inverted " %>
+    </div>
+  <% end %>
+
+  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+    <div class="column is-narrow">
+      <%= link_to "Olvidé mi contraseña", new_password_path(resource_name), class: "button is-link is-inverted " %>
+    </div>
+  <% end %>
+
+  <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+    <div class="column is-narrow">
+      <%= link_to "No recibí las instrucciones de confirmación", new_confirmation_path(resource_name), class: "button is-link is-inverted " %>
+    </div>
+  <% end %>
+
+  <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+    <div class="column is-narrow">
+      <%= link_to "No recibí las instrucciones de desbloqueo", new_unlock_path(resource_name), class: "button is-link is-inverted " %>
+    </div>
+  <% end %>
+
+  <%- if devise_mapping.omniauthable? %>
+    <div class="column is-narrow">
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to "Iniciar sesión con #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), method: :post, class: "button is-link is-inverted " %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,25 +1,27 @@
 <%= form_with(model: pool) do |form| %>
   <% if pool.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(pool.errors.count, "error") %> prohibited this pool from being saved:</h2>
-
-      <ul>
-        <% pool.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="notification is-danger is-light">
+      <%# <button class="delete"></button> %>
+      <div class="content">
+        <h6>No fue posible guardar debido a los siguientes errores: </h6>
+        <ul>
+          <% pool.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="columns is-vcentered is-gapless is-mobile">
-    <div class="column is-narrow mr-3">
-      <h1 class="title"><%= "Editar Quiniela #{@pool.id}" %></h1>
+  <div class="columns is-vcentered is-mobile">
+    <div class="column">
+      <h1 class="title"><%= "#{locals[:verb]} Quiniela #{@pool.id}" %></h1>
     </div>
 
-    <div class="column is-narrow">
-      <div class="field">
+    <div class="column">
+      <div class="field has-text-right">
         <div class="control">
-          <%= form.submit "Guardar", class: "button is-link is-inverted" %>
+          <%= form.submit "Guardar", class: "button is-primary" %>
         </div>
       </div>
     </div>
@@ -48,19 +50,19 @@
               <%= bet_form.hidden_field :id %>
               <%= bet_form.hidden_field :match_id %>
               <label class="radio is-size-7">
-                <%= bet_form.radio_button :guess, "home", disabled: bet_form.object.disabled? %>
+                <%= bet_form.radio_button :guess, "home", disabled: !bet_form.object.match.not_started? %>
                 <br>
                 LOCAL
               </label>
 
               <label class="radio is-size-7">
-                <%= bet_form.radio_button :guess, "draw", disabled: bet_form.object.disabled? %>
+                <%= bet_form.radio_button :guess, "draw", disabled: !bet_form.object.match.not_started? %>
                 <br>
                 EMPATE
               </label>
 
               <label class="radio is-size-7">
-                <%= bet_form.radio_button :guess, "away", disabled: bet_form.object.disabled? %>
+                <%= bet_form.radio_button :guess, "away", disabled: !bet_form.object.match.not_started? %>
                 <br>
                 VISITA
               </label>

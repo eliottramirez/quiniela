@@ -1,0 +1,87 @@
+<section class="has-background-light">
+  <div class="container is-max-desktop py-2">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li>
+          <span class="icon-text">
+            <%= link_to root_path do %>
+              <%= render "heroicons/home", style: :outline, size: :small %>
+              <span>Mis Grupos</span>
+            <% end %>
+          </span>
+        </li>
+        <li class="is-active"><%= link_to @party.name, party_path(@party), "aria-current" => "page" %></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <%# notice %>
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <h1 class="title"><%= @party.name %></h1>
+        </div>
+        <% if @admin %>
+          <div class="level-item">
+            <%= link_to edit_party_path(@party) , class: "button is-link is-inverted" do %>
+              <%= render 'heroicons/pencil_outline' %>
+            <% end %>
+          </div>
+          <div class="level-item">
+            <%= button_to @party, method: :delete, class: "button is-inverted is-danger" do %>
+              <%= render 'heroicons/trash_outline' %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="level-right">
+        <% if @member && !@admin %>
+          <div class="level-item">
+            <%= button_to pool_path(current_user.pool(@party)), method: :delete, class: "button is-danger" do %>
+              <span>Abandonar grupo</span>
+              <%= render 'heroicons/logout_outline' %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="columns is-centered py-6">
+      <div id="<%= dom_id @party %>" class="column is-half-tablet box">
+        <table class="table is-striped is-fullwidth">
+          <thead>
+            <th>Pos.</th>
+            <td>Usuario</td>
+            <td>Puntos</td>
+          </thead>
+
+          <tbody>
+            <% @party.sorted_users.each.with_index(1) do |user, index| %>
+              <tr>
+                <th><%= index %></th>
+                <td><%= link_to user.name, pool_path(user.pool(@party))  %></td>
+                <td><%= user.pool(@party).points %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <% if @admin || !@admin %>
+      <section class="hero is-link">
+        <div class="hero-body has-text-centered">
+          <p class="title">
+            Invita a tus amigos al grupo
+          </p>
+          <p class="subtitle">
+            Código: <span class="is-size-3 is-family-monospace has-text-weight-medium"><%= @party.sharing_code %></span>
+          </p>
+        </div>
+      </section>
+    <% end %>
+
+  </div>
+</section>
