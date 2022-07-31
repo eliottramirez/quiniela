@@ -1,4 +1,4 @@
-<nav class="navbar has-background-primary" role="navigation" aria-label="main navigation">
+<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
   <div class="navbar-brand ml-3">
     <%= link_to root_path, class: "navbar-item" do %>
       <%= image_tag "logo_navbar_128.png" %>
@@ -14,8 +14,7 @@
       <%= link_to "Inicio", root_path, class: "navbar-item" %>
       <%= link_to "Mis Grupos", parties_path, class: "navbar-item" %>
       <%= link_to "Calendario", matches_path, class: "navbar-item" %>
-      <%#= link_to "Clasificaciones", standings_path, class: "navbar-item" %>
-      <div class="navbar-item has-dropdown is-hoverable">
+      <%# <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
           More
         </a>
@@ -34,7 +33,7 @@
             Report an issue
           </a>
         </div>
-      </div>
+      </div> %>
     </div>
     <div class="navbar-end">
       <div class="navbar-item">
