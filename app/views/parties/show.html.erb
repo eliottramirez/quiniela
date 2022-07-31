@@ -65,7 +65,22 @@
             <% @party.sorted_users.each.with_index(1) do |user, index| %>
               <tr>
                 <th><%= index %></th>
-                <td><%= link_to user.name, pool_path(user.pool(@party))  %></td>
+                <td>
+                  <%= link_to pool_path(user.pool(@party)) do %>
+                    <div class="media">
+                      <div class="media-left">
+                        <figure class="image is-24x24">
+                          <% if user.avatar.present? %>
+                            <%= image_tag url_for(user.avatar), class: "is-rounded" %>
+                          <% end %>
+                        </figure>
+                      </div>
+                      <div class="media-content">
+                        <p><%= user.name %></p>
+                      </div>
+                    </div>
+                  <% end %>
+                </td>
                 <td><%= user.pool(@party).points %></td>
                 <% if current_user.admin_of?(@party) %>
                   <td>

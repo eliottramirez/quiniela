@@ -20,6 +20,7 @@ class User < ApplicationRecord
 
   has_many :pools, dependent: :destroy
   has_many :parties, through: :pools
+  has_one_attached :avatar
 
   def owner_of?(pool)
     pool.user_id == self.id
