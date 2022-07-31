@@ -1,7 +1,7 @@
 <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
   <div class="navbar-brand ml-3">
     <%= link_to root_path, class: "navbar-item" do %>
-      <%= image_tag "logo_navbar_128.png" %>
+      <%= image_tag "logo_navbar_128.png", size: "28x28" %>
     <% end %>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -39,6 +39,11 @@
       <div class="navbar-item">
         <% if user_signed_in? %>
           <p class="has-text-weight-medium"><%= "Hola, #{current_user.name}" %></p>
+          <% if current_user.avatar.present? %>
+            <figure class="image is-24x24 ml-2">
+              <%= image_tag url_for(current_user.avatar), class: "is-rounded" %>
+            </figure>
+          <% end %>
           <%#= link_to "Mi cuenta", edit_user_registration_path, class: "button -s-primary" %>
         <% else %>
           <%= link_to "Crear cuenta", new_user_registration_path, class: "button is-primary" %>
