@@ -33,6 +33,16 @@
         </div>
 
         <div class="field">
+          <%= f.label :email_confirmation, class: "label" do %>
+            <%= "Confirmar Email" %>
+            <span class="has-text-danger">*</span>
+          <% end %>
+          <div class="control">
+            <%= f.email_field :email_confirmation, autocomplete: "email", class: "input" %>
+          </div>
+        </div>
+
+        <div class="field">
           <%= f.label :password, class: "label" do %>
             <%= "Contraseña" %>
           <% end %>
