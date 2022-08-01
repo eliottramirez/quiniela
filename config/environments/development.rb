@@ -45,23 +45,23 @@ Rails.application.configure do
   config.action_mailer.delivery_method :smtp
 
   # mailtrap
-  config.action_mailer.smtp_settings = {
-    user_name: "3107d9e00cfc77",
-    password: Rails.application.credentials.dig(:mailtrap),
-    address: "smtp.mailtrap.io",
-    domain: "smtp.mailtrap.io",
-    port: "2525",
-    authentication: :cram_md5
-  }
+  # config.action_mailer.smtp_settings = {
+  #   user_name: "3107d9e00cfc77",
+  #   password: Rails.application.credentials.dig(:mailtrap),
+  #   address: "smtp.mailtrap.io",
+  #   domain: "smtp.mailtrap.io",
+  #   port: "2525",
+  #   authentication: :cram_md5
+  # }
 
   # mailgun
-  # config.action_mailer.smtp_settings = {
-  #   user_name: "postmaster@sandbox1d77758acf044ce08317c643b4efb513.mailgun.org",
-  #   password: Rails.application.credentials.dig(:mailgun),
-  #   address: "smtp.mailgun.org",
-  #   domain: "smtp.mailgun.org",
-  #   port: "587"
-  # }
+  config.action_mailer.smtp_settings = {
+    user_name: "postmaster@sandbox1d77758acf044ce08317c643b4efb513.mailgun.org",
+    password: Rails.application.credentials.dig(:mailgun),
+    address: "smtp.mailgun.org",
+    domain: "smtp.mailgun.org",
+    port: "587"
+  }
 
   # ============================================================================
 
