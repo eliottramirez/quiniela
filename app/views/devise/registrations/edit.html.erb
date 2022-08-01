@@ -20,7 +20,7 @@
             <%= "Avatar" %>
           <% end %>
 
-          <% if current_user.avatar.present? %>
+          <% if current_user.avatar.attached? %>
             <figure class="image is-128x128 mb-3">
               <%= image_tag url_for(f.object.avatar), class: "is-rounded" %>
             </figure>

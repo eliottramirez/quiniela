@@ -70,7 +70,7 @@
                     <div class="media">
                       <div class="media-left">
                         <figure class="image is-24x24">
-                          <% if user.avatar.present? %>
+                          <% if user.avatar.attached? %>
                             <%= image_tag url_for(user.avatar), class: "is-rounded" %>
                           <% end %>
                         </figure>
