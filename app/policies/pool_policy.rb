@@ -6,7 +6,7 @@ class PoolPolicy < ApplicationPolicy
   end
 
   def show?
-    user.owner_of?(record) || user.super_admin?
+    user.member_of?(record.party) || user.super_admin?
   end
 
   def create?
