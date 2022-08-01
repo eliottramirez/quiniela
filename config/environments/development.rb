@@ -35,23 +35,34 @@ Rails.application.configure do
 
   # =============================[ Action Mailer ]==============================
   # Don't care if the mailer can't send.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
 
   # Default url options for devise
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
+  config.action_mailer.delivery_method :smtp
+
   # mailtrap
-  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     user_name: "3107d9e00cfc77",
-    password: "08252238109f17",
+    password: Rails.application.credentials.dig(:mailtrap),
     address: "smtp.mailtrap.io",
     domain: "smtp.mailtrap.io",
     port: "2525",
     authentication: :cram_md5
   }
+
+  # mailgun
+  # config.action_mailer.smtp_settings = {
+  #   user_name: "postmaster@sandbox1d77758acf044ce08317c643b4efb513.mailgun.org",
+  #   password: Rails.application.credentials.dig(:mailgun),
+  #   address: "smtp.mailgun.org",
+  #   domain: "smtp.mailgun.org",
+  #   port: "587"
+  # }
+
   # ============================================================================
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
