@@ -56,7 +56,7 @@ Rails.application.configure do
 
   # mailgun
   config.action_mailer.smtp_settings = {
-    user_name: "postmaster@sandbox1d77758acf044ce08317c643b4efb513.mailgun.org",
+    user_name: "postmaster@mailing.eliottramirez.dev",
     password: Rails.application.credentials.dig(:mailgun),
     address: "smtp.mailgun.org",
     domain: "smtp.mailgun.org",
