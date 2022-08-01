@@ -30,7 +30,7 @@ class Party < ApplicationRecord
 
   def set_sharing_code
     # salt = "v!d3vaythMmXQfVWQTpD"
-    hasher = Hashids.new(Rails.application.credentials.dig(:hashids_salt))
+    hasher = Hashids.new(ENV.fetch("HASHIDS_SALT"))
     sharing_code = hasher.encode([self.id, self.admin.id])
 
     self.update(sharing_code: sharing_code)

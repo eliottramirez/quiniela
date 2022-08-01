@@ -53,7 +53,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -62,11 +62,31 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "quiniela_production"
 
+  # =============================[ Action Mailer ]==============================
+
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.perform_caching = false
+
+  # Default url options for devise
+  config.action_mailer.default_url_options = { host: "guarded-forest-13964.herokuapp.com" }
+
+  config.action_mailer.delivery_method :smtp
+
+  # mailgun
+  config.action_mailer.smtp_settings = {
+    user_name: ENV.fetch("MAILGUN_SMTP_LOGIN"),
+    password: ENV.fetch("MAILGUN_SMTP_PASSWORD"),
+    address: ENV.fetch("MAILGUN_SMTP_SERVER"),
+    domain: "guarded-forest-13964.herokuapp.com",
+    port: ENV.fetch("MAILGUN_SMTP_PORT")
+  }
+
+  # ============================================================================
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
