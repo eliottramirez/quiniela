@@ -24,7 +24,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates :email, confirmation: true
-  validates :email_confirmation, presence: true
+  validates :email_confirmation, presence: true, on: :create
+  validates :password, confirmation: true
   validates :password_confirmation, presence: true
 
   def owner_of?(pool)

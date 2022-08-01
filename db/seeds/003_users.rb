@@ -11,7 +11,9 @@ User.create(name: "Eliott", email: "eliott@gmail.com", password: "123456", super
   user = User.create(
     name: name,
     email: "#{name.downcase.gsub(' ', '_')}@mail.com",
-    password: "123456"
+    email_confirmation: "#{name.downcase.gsub(' ', '_')}@mail.com",
+    password: "123456",
+    password_confirmation: "123456"
   )
 
   user.avatar.attach(
