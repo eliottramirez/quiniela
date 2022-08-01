@@ -107,10 +107,10 @@
               <div class="field has-addons is-justify-content-center">
                 <div class="control">
                   <%= form.hidden_field :from_user, value: current_user.name %>
-                  <%= form.hidden_field :party, value: @party %>
+                  <%= form.hidden_field :party, value: @party.id %>
                   <%= form.hidden_field :party_name, value: @party.name %>
                   <%= form.hidden_field :sharing_code, value: @party.sharing_code %>
-                  <%= form.text_field :to_email, class: "input", placeholder: "Email" %>
+                  <%= form.email_field :to_email, class: "input", placeholder: "Email" %>
                 </div>
                 <div class="control">
                   <%= form.submit "Enviar invitación", class: "button is-link" %>
