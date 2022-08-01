@@ -11,6 +11,7 @@
 #  name                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  super_admin            :boolean          default(FALSE)
 #
 require "test_helper"
 
