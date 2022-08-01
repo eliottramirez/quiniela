@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_08_01_150625) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,8 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_150625) do
   end
 
   create_table "bets", force: :cascade do |t|
-    t.integer "pool_id", null: false
-    t.integer "match_id", null: false
+    t.bigint "pool_id", null: false
+    t.bigint "match_id", null: false
     t.string "guess"
     t.boolean "hit"
     t.datetime "created_at", null: false
@@ -56,8 +59,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_150625) do
     t.string "status", default: "not_started"
     t.integer "home_score", default: 0
     t.integer "away_score", default: 0
-    t.integer "home_team_id", null: false
-    t.integer "away_team_id", null: false
+    t.bigint "home_team_id", null: false
+    t.bigint "away_team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["away_team_id"], name: "index_matches_on_away_team_id"
@@ -72,8 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_150625) do
   end
 
   create_table "pools", force: :cascade do |t|
-    t.integer "party_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "party_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "party_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
