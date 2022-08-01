@@ -96,14 +96,29 @@
       </div>
     </div>
 
-    <section class="hero is-link">
+    <section class="hero is-primary">
       <div class="hero-body has-text-centered">
         <p class="title">
           Invita a tus amigos al grupo
         </p>
-        <p class="subtitle">
-          Código: <span class="is-size-3 is-family-monospace has-text-weight-medium"><%= @party.sharing_code %></span>
-        </p>
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <%= form_with url: send_invite_path, method: :get do |form| %>
+              <div class="field has-addons is-justify-content-center">
+                <div class="control">
+                  <%= form.hidden_field :from_user, value: current_user.name %>
+                  <%= form.hidden_field :party, value: @party %>
+                  <%= form.hidden_field :party_name, value: @party.name %>
+                  <%= form.hidden_field :sharing_code, value: @party.sharing_code %>
+                  <%= form.text_field :to_email, class: "input", placeholder: "Email" %>
+                </div>
+                <div class="control">
+                  <%= form.submit "Enviar invitación", class: "button is-link" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </section>
 

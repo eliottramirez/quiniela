@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   resources :matches, constraints: { format: :html }
   resources :pools, constraints: { format: :html }
 
+  get "/send_invite", to: "party_invite#send_invite"
+
   root "parties#index"
 end
