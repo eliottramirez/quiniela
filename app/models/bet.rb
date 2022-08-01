@@ -14,6 +14,8 @@ class Bet < ApplicationRecord
   belongs_to :pool
   belongs_to :match
 
+  validates :guess, inclusion: { in: ["home", "draw", "away"] }, allow_blank: true
+
   scope :hits, -> { where(hit: true).count }
 
   def guess?(guess)

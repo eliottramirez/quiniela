@@ -14,6 +14,8 @@ class Party < ApplicationRecord
 
   accepts_nested_attributes_for :pools, allow_destroy: true
 
+  validates :sharing_code, uniqueness: true, on: :update, allow_blank: true
+
   after_create :set_sharing_code
 
   def admin

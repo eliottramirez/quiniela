@@ -4,7 +4,6 @@
 #
 #  id           :integer          not null, primary key
 #  date         :datetime
-#  stage        :string
 #  result       :string
 #  status       :string           default("not_started")
 #  home_score   :integer          default(0)
@@ -18,6 +17,11 @@ class Match < ApplicationRecord
   belongs_to :home_team, class_name: "Team"
   belongs_to :away_team, class_name: "Team"
   has_many :bets
+
+  validates :result, inclusion: { in: ["home", "draw", "away"] }, allow_blank: true
+  validates :status, inclusion: { in: ["not_started", "live", "finished"] }
+  validates :home_score, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :away_score, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   before_update :update_result
   after_update :update_bets

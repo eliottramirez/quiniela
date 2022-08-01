@@ -23,6 +23,10 @@ class User < ApplicationRecord
   has_many :parties, through: :pools
   has_one_attached :avatar
 
+  validates :email, confirmation: true
+  validates :email_confirmation, presence: true
+  validates :password_confirmation, presence: true
+
   def owner_of?(pool)
     pool.user_id == self.id
   end
