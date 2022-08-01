@@ -4,7 +4,6 @@
 #
 #  id           :integer          not null, primary key
 #  date         :datetime
-#  stage        :string
 #  result       :string
 #  status       :string           default("not_started")
 #  home_score   :integer          default(0)
