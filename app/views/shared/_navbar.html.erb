@@ -51,9 +51,9 @@
       </div>
       <div class="navbar-item">
         <% if user_signed_in? %>
-          <%= link_to "Cerrar sesión", destroy_user_session_path, data: { turbo_method: :delete }, class: "button is-light" %>
+          <%= link_to "Cerrar sesión", destroy_user_session_path, data: { turbo_method: :delete }, class: "button is-info" %>
         <% else %>
-          <%= link_to "Iniciar sesión", new_user_session_path, class: "button is-light" %>
+          <%= link_to "Iniciar sesión", new_user_session_path, class: "button is-info" %>
         <% end%>
       </div>
     </div>

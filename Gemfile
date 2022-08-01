@@ -81,3 +81,5 @@ gem "devise"
 gem "pundit"
 
 gem "hashids"
+
+gem "cssbundling-rails", "~> 1.1"
