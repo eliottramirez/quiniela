@@ -17,20 +17,17 @@ class Party < ApplicationRecord
   after_create :set_sharing_code
 
   def admin
-    pool = Pool.find_by(party: self, party_admin: true)
-
-    pool.user
+    Pool.find_by(party: self, party_admin: true)&.user
   end
 
   def sorted_users
     self.users.sort_by { |user| user.pool(self).points }.reverse
   end
 
-  private
+  # private
 
   def set_sharing_code
-    salt = "v!d3vaythMmXQfVWQTpD"
-    hasher = Hashids.new(salt)
+    hasher = Hashids.new(Rails.application.credentials.dig(:hashids_salt))
     sharing_code = hasher.encode([self.id, self.admin.id])
 
     self.update(sharing_code: sharing_code)
