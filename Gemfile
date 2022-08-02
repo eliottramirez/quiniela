@@ -86,3 +86,6 @@ gem "pundit"
 gem "hashids"
 
 gem "cssbundling-rails", "~> 1.1"
+
+gem "image_processing", ">= 1.2"
+gem "ruby-vips"
