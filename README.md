@@ -1,24 +1,37 @@
-# README
+# Quiniela Copa Mundial Qatar 2022
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplicación web desarrollada en Ruby on Rails que permite jugar una Quiniela con amigos para el torneo "Copa Mundial de la FIFA Qatar 2022".
 
-Things you may want to cover:
+Proyecto final para el Bootcamp de Rails de [Código Facilito](https://codigofacilito.com).
 
-* Ruby version
+Versión de Ruby: `3.1.1`
 
-* System dependencies
+Versión de Rails: `7.0.3`
 
-* Configuration
+### Dependencias del sistema
 
-* Database creation
+`libvips` y/o `imagemagick`
 
-* Database initialization
+`postgresql`
 
-* How to run the test suite
+### Base de datos
 
-* Services (job queues, cache servers, search engines, etc.)
+El repositorio incluye las migraciones necesarias y seeds correspondientes para los modelos.
 
-* Deployment instructions
+`rails db:migrate && rails db:seed`
 
-* ...
+### Demo
+
+El demo de la aplicación web está en:
+
+https://guarded-forest-13964.herokuapp.com/
+
+Puedes crear un usuario usario ó utilizar alguno de estos:
+
+> usuario: `valentina@mail.com`
+>
+> password: `123456`
+
+> usuario: `santiago@mail.com`
+>
+> password: `123456`
