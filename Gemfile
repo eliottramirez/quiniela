@@ -87,4 +87,5 @@ gem "hashids"
 
 gem "cssbundling-rails", "~> 1.1"
 
+gem "aws-sdk-s3"
 gem "image_processing", ">= 1.2"

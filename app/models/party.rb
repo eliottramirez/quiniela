@@ -29,8 +29,8 @@ class Party < ApplicationRecord
   # private
 
   def set_sharing_code
-    # salt = "v!d3vaythMmXQfVWQTpD"
-    hasher = Hashids.new(ENV.fetch("HASHIDS_SALT"))
+    salt = "v!d3vaythMmXQfVWQTpD"
+    hasher = Hashids.new(salt)
     sharing_code = hasher.encode([self.id, self.admin.id])
 
     self.update(sharing_code: sharing_code)
