@@ -10,7 +10,7 @@ class PoolsController < ApplicationController
   def show
     @bets =
       if current_user.owner_of?(@pool)
-        @pool.bets
+        @pool.bets.order(:match_id)
       else
         @pool.public_bets
       end

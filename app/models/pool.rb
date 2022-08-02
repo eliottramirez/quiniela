@@ -21,6 +21,6 @@ class Pool < ApplicationRecord
   end
 
   def public_bets
-    self.bets.reject { |bet| bet.match.not_started? }
+    self.bets.order(:match_id).reject { |bet| bet.match.not_started? }
   end
 end

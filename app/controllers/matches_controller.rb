@@ -3,7 +3,7 @@ class MatchesController < ApplicationController
 
   # GET /matches or /matches.json
   def index
-    @matches = authorize Match.all
+    @matches = authorize Match.all.order(:id)
   end
 
   # GET /matches/1 or /matches/1.json
